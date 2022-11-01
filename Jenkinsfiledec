@@ -1,5 +1,8 @@
 pipeline{
-    agent any
+    agent{
+    lable"slaves"
+    }
+    
     tools{
     maven"maven3.8.6"    
     }
