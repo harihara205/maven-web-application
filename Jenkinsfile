@@ -21,16 +21,12 @@ node{
     stage('upload Artifact Repo into Nexus'){
     sh "$mavenHome/bin/mvn deploy"
         
-    }
-    //deploy application into tomcat server
-    stage('Deploy application into Tomcat'){ sshagent(['11f46d35-a40b-43b5-a3f7-2ce71729f528']) {
-    
-    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@http://13.127.41.3:/opt/apache-tomcat-9.0.68/webapps"
-    
-}
-        
         
     }
-
-    
+    //deploy app into tomcat server
+    stage('deploy app into tomcat'){
+     sshagent(['11f46d35-a40b-43b5-a3f7-2ce71729f528']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@65.0.97.223:/opt/apache-tomcat-9.0.68/webapps"
+}   
+    }
 }
